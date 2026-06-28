@@ -276,6 +276,96 @@
     .btn-wish-det:hover { color: #D62839; border-color: #D62839; }
     .btn-wish-det.wishlisted { color: #D62839; border-color: #D62839; background: #FFF5F5; }
 
+    /* ─── Virtual Try-On button ────────────────────────── */
+    .btn-tryon {
+      width: 100%; margin: -6px 0 20px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: linear-gradient(135deg, var(--dark) 0%, #2a2640 100%);
+      color: #fff; border: 1px solid var(--gold);
+      padding: 14px 16px; border-radius: 2px; cursor: pointer;
+      font-family: 'Lato', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      transition: box-shadow 0.25s, transform 0.1s;
+    }
+    .btn-tryon:hover { box-shadow: 0 6px 22px rgba(201,168,76,0.28); }
+    .btn-tryon:active { transform: translateY(1px); }
+    .btn-tryon i { color: var(--gold-light); font-size: 15px; }
+    .btn-tryon .tryon-ai {
+      font-style: normal; font-size: 9px; letter-spacing: 1px;
+      background: var(--gold); color: var(--dark);
+      padding: 2px 6px; border-radius: 10px; font-weight: 800;
+    }
+
+    /* ─── Try-On modal ─────────────────────────────────── */
+    .tryon-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(20,18,30,0.72); backdrop-filter: blur(3px);
+      display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .tryon-overlay.open { display: flex; }
+    .tryon-modal {
+      background: var(--white); width: 100%; max-width: 880px;
+      max-height: 92vh; overflow-y: auto; border-radius: 4px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    }
+    .tryon-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: var(--white); z-index: 2;
+    }
+    .tryon-head h3 { font-family: 'Playfair Display', serif; font-size: 20px; }
+    .tryon-head .tryon-sub { font-size: 11px; color: var(--gray); margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
+    .tryon-close { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--gray); }
+    .tryon-close:hover { color: var(--dark); }
+    .tryon-body { padding: 24px; }
+    .tryon-stage {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;
+    }
+    .tryon-panel { text-align: center; }
+    .tryon-panel-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .tryon-drop {
+      border: 2px dashed var(--border); border-radius: 4px;
+      aspect-ratio: 4/5; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; color: var(--gray); transition: border-color 0.2s, background 0.2s;
+      overflow: hidden; position: relative; background: var(--cream);
+    }
+    .tryon-drop:hover { border-color: var(--gold); background: #fff; }
+    .tryon-drop i { font-size: 30px; color: var(--gold); }
+    .tryon-drop p { font-size: 12px; padding: 0 16px; }
+    .tryon-drop img { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; padding: 8px; background: var(--cream); }
+    .tryon-loading {
+      position: absolute; inset: 0; z-index: 3;
+      display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+      background: rgba(248,242,230,0.92); color: var(--gray); padding: 16px; text-align: center;
+    }
+    .tryon-loading.show { display: flex; }
+    .tryon-loading .ring {
+      width: 38px; height: 38px; border: 3px solid var(--border);
+      border-top-color: var(--gold); border-radius: 50%;
+      animation: tryon-spin 0.9s linear infinite;
+    }
+    .tryon-loading p { font-size: 12px; }
+    .tryon-garment img { width: 100%; aspect-ratio: 4/5; object-fit: contain; padding: 8px; background: var(--cream); border-radius: 4px; border: 1px solid var(--border); }
+    @keyframes tryon-spin { to { transform: rotate(360deg); } }
+    .tryon-actions { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .tryon-btn {
+      flex: 1; min-width: 140px; padding: 14px; border: none; border-radius: 2px;
+      font-family: 'Lato', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+      transition: background 0.25s, opacity 0.2s;
+    }
+    .tryon-btn-primary { background: var(--burgundy); color: #fff; }
+    .tryon-btn-primary:hover { background: var(--deep-red); }
+    .tryon-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .tryon-btn-ghost { background: var(--cream); color: var(--dark); border: 1px solid var(--border); }
+    .tryon-btn-ghost:hover { background: var(--cream-dark); }
+    .tryon-err { color: var(--deep-red); font-size: 12px; margin-top: 12px; text-align: center; }
+    .tryon-disclaimer { font-size: 10px; color: var(--gray); text-align: center; margin-top: 14px; line-height: 1.6; }
+    @media (max-width: 600px) {
+      .tryon-stage { grid-template-columns: 1fr; }
+    }
+
     /* Meta pills */
     .meta-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -681,6 +771,53 @@
   </div>
 </aside>
 
+<!-- Virtual Try-On Modal -->
+<div class="tryon-overlay" id="tryon-overlay">
+  <div class="tryon-modal" role="dialog" aria-modal="true" aria-label="Virtual Try-On">
+    <div class="tryon-head">
+      <div>
+        <h3>Virtual Try-On</h3>
+        <div class="tryon-sub">Powered by AI</div>
+      </div>
+      <button class="tryon-close" id="tryon-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="tryon-body">
+      <div class="tryon-stage">
+        <!-- Your photo — the result renders in this same container -->
+        <div class="tryon-panel">
+          <div class="tryon-panel-label" id="tryon-left-label">Your Photo</div>
+          <label class="tryon-drop" id="tryon-drop">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Tap to upload or take a full-body photo</p>
+            <input type="file" id="tryon-file" accept="image/*" hidden />
+            <div class="tryon-loading" id="tryon-loading">
+              <div class="ring"></div>
+              <p>Dressing your photo…<br>This can take 10–20 seconds</p>
+            </div>
+          </label>
+        </div>
+        <!-- Garment (reference) -->
+        <div class="tryon-panel">
+          <div class="tryon-panel-label">The Outfit</div>
+          <div class="tryon-garment" id="tryon-garment-wrap">
+            <img id="tryon-garment-img" src="" alt="Garment" />
+          </div>
+        </div>
+      </div>
+
+      <div class="tryon-actions">
+        <button class="tryon-btn tryon-btn-primary" id="tryon-go" disabled>Generate Try-On</button>
+        <button class="tryon-btn tryon-btn-ghost" id="tryon-download" style="display:none;">Download</button>
+      </div>
+      <div class="tryon-err" id="tryon-err" style="display:none;"></div>
+      <p class="tryon-disclaimer">
+        Your photo is sent securely to generate the preview and is not stored. Results are AI-generated
+        approximations and may differ from the actual product fit, colour, and drape.
+      </p>
+    </div>
+  </div>
+</div>
+
 <script src="products.js"></script>
 <script>
 (function () {
@@ -810,6 +947,12 @@
               <i class="far fa-heart"></i>
             </button>
           </div>
+
+          <!-- Virtual Try-On -->
+          <button class="btn-tryon" id="btn-tryon">
+            <i class="fas fa-camera-retro"></i>
+            <span>Try It On You</span>
+          </button>
 
           <!-- Delivery -->
           <div class="delivery-strip">
@@ -1037,6 +1180,156 @@
     icon.className = wished ? 'fas fa-heart' : 'far fa-heart';
     $('btn-wish').classList.toggle('wishlisted', wished);
   };
+
+  // ── Virtual Try-On ────────────────────────────────────
+  (function initTryOn() {
+    const overlay   = $('tryon-overlay');
+    const dropEl    = $('tryon-drop');
+    const garmentEl = $('tryon-garment-img');
+    const loadingEl = $('tryon-loading');
+    const goBtn     = $('tryon-go');
+    const dlBtn     = $('tryon-download');
+    const errEl     = $('tryon-err');
+    const leftLbl   = $('tryon-left-label');
+
+    let userDataUrl = null;   // user's uploaded photo (data URL) — always the try-on input
+    let resultUrl   = null;   // generated image (data URL) — output only, never re-sent
+    let genCount    = 0;      // bumps each run so Regenerate yields a fresh variation
+    let previewImg  = null;   // <img> inside the left container; shows upload, then the result
+
+    function openTryOn() {
+      // Use the currently displayed product image as the garment
+      garmentEl.src = mainImg.src;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeTryOn() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function showError(msg) {
+      errEl.textContent = msg;
+      errEl.style.display = 'block';
+    }
+    function clearError() { errEl.style.display = 'none'; }
+
+    // Restore the left container to the plain uploaded photo (no result shown).
+    function resetResult() {
+      resultUrl = null;
+      loadingEl.classList.remove('show');
+      if (previewImg && userDataUrl) previewImg.src = userDataUrl;
+      leftLbl.textContent = 'Your Photo';
+      dlBtn.style.display = 'none';
+      goBtn.textContent = 'Generate Try-On';
+    }
+
+    $('btn-tryon').onclick = openTryOn;
+    $('tryon-close').onclick = closeTryOn;
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeTryOn(); });
+
+    // Downscale a chosen file to a compact JPEG data URL (keeps payload < ~1 MB).
+    function loadScaled(file) {
+      return new Promise((resolve, reject) => {
+        if (!file.type.startsWith('image/')) { reject(new Error('Please choose an image file.')); return; }
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('Could not read that file.'));
+        reader.onload = e => {
+          const img = new Image();
+          img.onerror = () => reject(new Error('That image could not be loaded.'));
+          img.onload = () => {
+            const MAX = 1024;
+            let { width: w, height: h } = img;
+            if (w > MAX || h > MAX) {
+              const s = Math.min(MAX / w, MAX / h);
+              w = Math.round(w * s); h = Math.round(h * s);
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', 0.9));
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleFile(file) {
+      if (!file) return;
+      try {
+        clearError();
+        userDataUrl = await loadScaled(file);
+        if (!previewImg) {
+          previewImg = document.createElement('img');
+          previewImg.alt = 'Your photo';
+          dropEl.appendChild(previewImg); // input element stays in the label
+        }
+        previewImg.src = userDataUrl;
+        goBtn.disabled = false;
+        resetResult();
+      } catch (err) {
+        showError(err.message);
+      }
+    }
+
+    // The drop area is a <label> wrapping the input, so clicks open the picker.
+    // We re-read from the (stable) input element each time it changes.
+    dropEl.addEventListener('change', e => {
+      if (e.target && e.target.files) handleFile(e.target.files[0]);
+    });
+
+    // Generate — the result replaces the photo inside the SAME (left) container.
+    goBtn.onclick = async () => {
+      if (!userDataUrl) { showError('Please upload a photo first.'); return; }
+      clearError();
+      goBtn.disabled = true;
+      goBtn.textContent = 'Generating…';
+      loadingEl.classList.add('show');   // spinner over the uploaded-photo container
+      leftLbl.textContent = 'Your Try-On';
+
+      try {
+        // Absolute URL so the backend can fetch the garment image
+        const garmentUrl = new URL(garmentEl.getAttribute('src'), location.href).href;
+        const res = await fetch('/api/tryon', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userImage: userDataUrl,          // always the uploaded photo, never the previous result
+            garmentImageUrl: garmentUrl,
+            productName: product.name,
+            category: product.categoryLabel,
+            variation: ++genCount,           // nudges the model to a new take on each Regenerate
+          }),
+        });
+        if (!res.ok) {
+          const t = await res.text().catch(() => '');
+          throw new Error(t || `Request failed (${res.status})`);
+        }
+        const data = await res.json();
+        if (!data.image) throw new Error('No image returned. Please try a different photo.');
+        resultUrl = data.image; // data URL
+        previewImg.src = resultUrl;           // show the try-on in the uploaded photo's container
+        previewImg.alt = `You wearing ${product.name}`;
+        dlBtn.style.display = '';
+      } catch (err) {
+        resetResult();
+        showError(err.message || 'Something went wrong. Please try again.');
+      } finally {
+        loadingEl.classList.remove('show');
+        goBtn.disabled = false;
+        goBtn.textContent = resultUrl ? 'Regenerate' : 'Generate Try-On';
+      }
+    };
+
+    // Download result
+    dlBtn.onclick = () => {
+      if (!resultUrl) return;
+      const a = document.createElement('a');
+      a.href = resultUrl;
+      a.download = `tryon-${(product.name || 'outfit').replace(/\s+/g, '-').toLowerCase()}.png`;
+      a.click();
+    };
+  })();
 
   // ── Accordions ────────────────────────────────────────
   document.querySelectorAll('.acc-hdr').forEach(hdr => {
