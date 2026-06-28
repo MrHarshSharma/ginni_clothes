@@ -70,11 +70,17 @@ module.exports = async function handler(req, res) {
       `rest of the scene. ` +
       `Preserve the main person's face, body shape, skin tone, hair and pose exactly, and keep a simple, ` +
       `uncluttered background. ` +
-      `Fit the garment naturally to their body with realistic folds, drape, lighting and shadows. ` +
-      `Match the garment's colour, pattern and texture to the second image. ` +
+      `GARMENT FIDELITY IS THE TOP PRIORITY. Treat the SECOND image as the exact ground-truth reference and ` +
+      `reproduce that garment as faithfully and identically as possible — do NOT redesign, restyle, simplify or ` +
+      `invent any part of it. Copy precisely: the exact colour and fabric sheen; every embroidery and zari motif ` +
+      `and its placement; the neckline and blouse/bodice design; the sleeve length and cut; the border and hem ` +
+      `pattern; the dupatta/scarf and how it falls; and any beadwork, sequins or print. The motif layout, density ` +
+      `and gold-work pattern must look the same as the reference, not a different floral pattern. ` +
+      `Only adapt the garment's fit and drape to the person's body and pose; keep every design detail identical. ` +
+      `Render it photorealistically with natural folds, lighting and shadows consistent with the first photo. ` +
       (variation > 1
-        ? `This is regeneration attempt #${variation}: keep the same person, garment and background, ` +
-          `but produce a fresh, slightly different rendering (vary fabric drape, folds and lighting). `
+        ? `This is regeneration attempt #${variation}: keep the same person and background, and match the ` +
+          `garment's embroidery and details even more closely to the reference image. `
         : '') +
       `Output only the final edited photo.`;
 
