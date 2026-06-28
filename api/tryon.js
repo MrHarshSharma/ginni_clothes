@@ -62,7 +62,14 @@ module.exports = async function handler(req, res) {
       `You are a virtual fashion try-on assistant. The FIRST image is a photo of a person. ` +
       `The SECOND image shows a garment: "${productName || 'an outfit'}"${category ? ` (${category})` : ''}. ` +
       `Generate a photorealistic image of the SAME person from the first photo now wearing this garment. ` +
-      `Preserve the person's face, body shape, skin tone, hair, pose, and the background exactly. ` +
+      `Use the single main, front-most person as the subject. ` +
+      `IMPORTANT: The first photo may show the person more than once or include other people in the background. ` +
+      `The result must contain EXACTLY ONE person — only that main subject — wearing the garment. Completely ` +
+      `remove every other person, duplicate, reflection or background figure, and remove anyone still in the ` +
+      `original clothes. Replace the area they occupied with a clean, plain studio background that matches the ` +
+      `rest of the scene. ` +
+      `Preserve the main person's face, body shape, skin tone, hair and pose exactly, and keep a simple, ` +
+      `uncluttered background. ` +
       `Fit the garment naturally to their body with realistic folds, drape, lighting and shadows. ` +
       `Match the garment's colour, pattern and texture to the second image. ` +
       (variation > 1
